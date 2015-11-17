@@ -8,6 +8,7 @@
   },
   "keywords": [],
   "author": "@rssilva",
+  "repository": "https://github.com/rssilva/johnny-telegram",
   "license": "MIT",
   "dependencies": {
     "johnny-five": "^0.8.106",
