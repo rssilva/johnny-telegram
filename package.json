@@ -1,7 +1,7 @@
 {
   "name": "johnny-telegram",
   "version": "0.0.1",
-  "description": "A way to connect your johnny-five using the Telegram API",
+  "description": "A simple way to connect your johnny-five using the Telegram API",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
