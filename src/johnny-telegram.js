@@ -46,7 +46,7 @@ var JohnnyTelegram = {
   },
 
   exec: function (interpreted, message) {
-    var response = ':)';
+    var response = 'command not found';
 
     if (interpreted.command == 'list') {
       response = this.list();
@@ -54,6 +54,10 @@ var JohnnyTelegram = {
 
     if (interpreted.command == 'listlimits') {
       response = this.listLimits();
+    }
+
+    if (interpreted.command == 'removelimit') {
+      response = this.removeLimit(interpreted.name, interpreted.args[0]);
     }
 
     if (interpreted.command == 'call') {
@@ -101,13 +105,18 @@ var JohnnyTelegram = {
   },
 
   checkLimits: function (name) {
-    var limits;
+    var limitsArr;
+    var limit;
 
     if (this.limits[name]) {
-      limits = Object.keys(this.limits[name]);
+      limitsArr = Object.keys(this.limits[name]);
 
-      limits.forEach(function (limit) {
-        this.executeLimit(name, limit, this.limits[name][limit]);
+      limitsArr.forEach(function (limitName) {
+        limit = this.limits[name][limitName];
+
+        if (limit) {
+          this.executeLimit(name, limitName, limit);
+        }
       }.bind(this));
     }
   },
@@ -127,6 +136,19 @@ var JohnnyTelegram = {
       limit.time = time;
       this.bot.sendMessage(limit.chatId, name + ', ' + limitName +  ' = ' + value);
     }
+  },
+
+  removeLimit: function (peripheralName, limitName) {
+    var name = peripheralName + ', ' + limitName;
+    var response = name + ' not found';
+
+    if (this.limits[peripheralName] && this.limits[peripheralName][limitName]) {
+      delete this.limits[peripheralName][limitName]
+
+      response = name + ' removed';
+    }
+
+    return response;
   },
 
   onMessage: function (message) {

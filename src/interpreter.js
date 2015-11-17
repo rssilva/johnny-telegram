@@ -1,4 +1,4 @@
-var commandList = ['list', 'listlimits', 'call', 'value', 'minorthan', 'majorthan'];
+var commandList = ['list', 'listlimits', 'removelimit', 'call', 'value', 'minorthan', 'majorthan'];
 
 var Interpreter = {
 	resolve: function (command) {
@@ -58,6 +58,10 @@ var Interpreter = {
 
     if (command == 'minorthan' || command == 'majorthan') {
       args = words.slice(3);
+    }
+
+    if (command == 'removelimit') {
+      args = words.slice(2);
     }
 
     return args;
