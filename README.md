@@ -7,37 +7,37 @@ Creates a Telegram Bot with the [node-telegram-bot-api](https://github.com/yagop
 ### Usage
 A simple example
 
-  ```javascript
-    // Require the modules
-    var johnnyTelegram = require('../src/johnny-telegram.js');
-    var five = require('johnny-five');
-    var TelegramBot = require('node-telegram-bot-api');
+```javascript
+// Require the modules
+var johnnyTelegram = require('../src/johnny-telegram.js');
+var five = require('johnny-five');
+var TelegramBot = require('node-telegram-bot-api');
 
-    // Instantiate a new board
-    var board = new five.Board();
+// Instantiate a new board
+var board = new five.Board();
 
-    // Creates a new Telegram Bot
-    var bot = new TelegramBot('YOUR_TELEGRAM_KEY', {polling: true});
+// Creates a new Telegram Bot
+var bot = new TelegramBot('YOUR_TELEGRAM_KEY', {polling: true});
 
-    // Initiates the Johnny Telegram instance
-    johnnyTelegram.init(bot);
+// Initiates the Johnny Telegram instance
+johnnyTelegram.init(bot);
 
-    // Listen the board 'ready' event be sure that all 
-    //  the hardware initialization is ok 
-    board.on('ready', function () {
-      // Creates a led that will be available on pin 13
-      var led = new five.Led(13);
+// Listen the board 'ready' event be sure that all 
+//  the hardware initialization is ok 
+board.on('ready', function () {
+  // Creates a led that will be available on pin 13
+  var led = new five.Led(13);
 
-      // Adds a peripheral called 'led' to Johnny Telegram
-      johnnyTelegram.add('led', led);
+  // Adds a peripheral called 'led' to Johnny Telegram
+  johnnyTelegram.add('led', led);
 
-      // This will set Johnny Telegram events like receiving a message from Telegram
-      johnnyTelegram.bindEvents();
-    });
+  // This will set Johnny Telegram events like receiving a message from Telegram
+  johnnyTelegram.bindEvents();
+});
 
-    // And now you can for example, send a message to the bot like 'call led blink 500'
-    //  and the command 'call' will call the method led's method 'blink' with 500 as parameter :)
-  ```
+// And now you can for example, send a message to the bot like 'call led blink 500'
+//  and the command 'call' will call the method led's method 'blink' with 500 as parameter :)
+```
 
 ### Command list:
   ```shell
