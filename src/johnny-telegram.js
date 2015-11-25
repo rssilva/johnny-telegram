@@ -39,10 +39,15 @@ var JohnnyTelegram = {
 
   executeMethod: function (name, method, args) {
     var peripheral = this.peripherals[name];
+    var response = 'method does not exist';
 
     if (peripheral && peripheral[method]) {
       peripheral[method].apply(this.peripherals[name], args);
+
+      response = name + '.' + method + ' called with ' + args.join(', ');
     }
+
+    return response;
   },
 
   exec: function (interpreted, message) {
